@@ -43,5 +43,5 @@ export default function LibraryMap({ libraries }: { libraries: Library[] }) {
     initMap()
   }, [libraries])
 
-  return <div ref={mapRef} className="w-full h-[600px] rounded-lg border border-[#E5DFD0]" />
+  return <div ref={mapRef} className="w-full h-150 rounded-lg border border-[#E5DFD0]" />
 }

@@ -28,36 +28,33 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="bg-white border-b border-[#E5DFD0] px-6 py-3 flex items-center justify-between">
-      <Link href="/" className="font-semibold text-[#2B2620]">
+    <nav className="bg-[#1F1B16] border-b border-[#332D24] px-6 py-3 flex items-center justify-between">
+      <Link href="/" className="font-serif text-lg text-[#F7F4EC]">
         ShelfSpace
       </Link>
 
       <div className="flex items-center gap-4 text-sm">
-        <Link href="/explore" className="text-[#6B6354] hover:text-[#2B2620]">
+        <Link href="/explore" className="text-[#A8A296] hover:text-[#F7F4EC]">
           Explore
         </Link>
 
         {user ? (
           <>
-            <Link href="/dashboard" className="text-[#6B6354] hover:text-[#2B2620]">
+            <Link href="/dashboard" className="text-[#A8A296] hover:text-[#F7F4EC]">
               Dashboard
             </Link>
-            <button
-              onClick={handleLogout}
-              className="text-[#6B6354] hover:text-[#2B2620]"
-            >
+            <button onClick={handleLogout} className="text-[#A8A296] hover:text-[#F7F4EC]">
               Log out
             </button>
           </>
         ) : (
           <>
-            <Link href="/login" className="text-[#6B6354] hover:text-[#2B2620]">
+            <Link href="/login" className="text-[#A8A296] hover:text-[#F7F4EC]">
               Log in
             </Link>
             <Link
               href="/signup"
-              className="bg-[#2B2620] text-[#FAF7F0] px-3 py-1.5 rounded-md font-medium"
+              className="bg-[#FF6B47] text-[#2A1505] px-3 py-1.5 rounded-md font-medium"
             >
               Sign up
             </Link>

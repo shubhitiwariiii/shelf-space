@@ -15,29 +15,29 @@ export default async function LibraryDetailPage({
   const details = library.library_details
 
   return (
-    <div className="min-h-screen bg-[#FAF7F0] px-6 py-8">
+    <div className="min-h-screen bg-[#15130F] px-6 py-8">
       <div className="max-w-2xl mx-auto">
-        <Link href="/explore" className="text-sm text-[#6B6354] hover:text-[#2B2620]">
+        <Link href="/explore" className="text-sm text-[#A8A296] hover:text-[#F7F4EC]">
           ← Back to explore
         </Link>
 
-        <div className="mt-4 bg-white border border-[#E5DFD0] rounded-lg p-6">
+        <div className="mt-4 bg-[#1F1B16] border border-[#332D24] rounded-lg p-6">
           <div className="flex justify-between items-start">
             <div>
-              <h1 className="text-2xl font-semibold text-[#2B2620]">{library.name}</h1>
-              <p className="text-sm text-[#6B6354] mt-1">{library.address}</p>
-              <p className="text-xs text-[#9A8F73] mt-1">
+              <h1 className="font-serif text-2xl text-[#F7F4EC]">{library.name}</h1>
+              <p className="text-sm text-[#A8A296] mt-1">{library.address}</p>
+              <p className="text-xs text-[#6B6560] mt-1">
                 {library.district}, {library.state}
               </p>
             </div>
             {library.google_rating && (
-              <span className="text-sm font-medium text-[#2B2620] bg-[#F0E9D8] px-3 py-1.5 rounded">
+              <span className="text-sm font-medium text-[#04342C] bg-[#2DD4A8] px-3 py-1.5 rounded">
                 ★ {library.google_rating}
               </span>
             )}
           </div>
 
-          <div className="mt-6 border-t border-[#E5DFD0] pt-6 grid gap-4">
+          <div className="mt-6 border-t border-[#332D24] pt-6 grid gap-4">
             <DetailRow label="Pricing" value={details?.pricing_info} />
             <DetailRow label="Owner" value={details?.owner_name} />
             <DetailRow label="Contact" value={details?.owner_contact} />
@@ -52,8 +52,8 @@ export default async function LibraryDetailPage({
           </div>
 
           {!details && (
-            <p className="mt-6 text-sm text-[#9A8F73] italic">
-              Detailed info for this library hasn't been added yet.
+            <p className="mt-6 text-sm text-[#6B6560] italic">
+              Detailed info for this library hasn&apos;t been added yet.
             </p>
           )}
         </div>
@@ -66,8 +66,8 @@ function DetailRow({ label, value }: { label: string; value: string | null | und
   if (!value) return null
   return (
     <div>
-      <p className="text-xs font-medium text-[#9A8F73] uppercase tracking-wide">{label}</p>
-      <p className="text-sm text-[#2B2620] mt-1">{value}</p>
+      <p className="text-xs font-medium text-[#6B6560] uppercase tracking-wide">{label}</p>
+      <p className="text-sm text-[#F7F4EC] mt-1">{value}</p>
     </div>
   )
 }

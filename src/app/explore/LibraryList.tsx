@@ -8,16 +8,16 @@ export default function LibraryList({ libraries }: { libraries: Library[] }) {
         <Link
           key={lib.id}
           href={`/library/${lib.id}`}
-          className="block bg-white border border-[#E5DFD0] rounded-lg p-4 hover:border-[#C9BFA3] transition-colors"
+          className="block bg-[#1F1B16] border border-[#332D24] rounded-lg p-4 hover:border-[#FF6B47]/40 transition-colors"
         >
           <div className="flex justify-between items-start">
             <div>
-              <h3 className="font-semibold text-[#2B2620]">{lib.name}</h3>
-              <p className="text-sm text-[#6B6354] mt-0.5">{lib.address}</p>
-              <p className="text-xs text-[#9A8F73] mt-1">{lib.district}, {lib.state}</p>
+              <h3 className="font-serif text-lg text-[#F7F4EC]">{lib.name}</h3>
+              <p className="text-sm text-[#A8A296] mt-0.5">{lib.address}</p>
+              <p className="text-xs text-[#6B6560] mt-1">{lib.district}, {lib.state}</p>
             </div>
             {lib.google_rating && (
-              <span className="text-sm font-medium text-[#2B2620] bg-[#F0E9D8] px-2 py-1 rounded">
+              <span className="text-sm font-medium text-[#04342C] bg-[#2DD4A8] px-2 py-1 rounded">
                 ★ {lib.google_rating}
               </span>
             )}

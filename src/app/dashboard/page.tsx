@@ -18,20 +18,20 @@ export default async function DashboardPage() {
   const savedLibraries = await getSavedLibraries(user.id)
 
   return (
-    <div className="min-h-screen bg-[#FAF7F0] px-6 py-8">
+    <div className="min-h-screen bg-[#15130F] px-6 py-8">
       <div className="max-w-3xl mx-auto">
-        <h1 className="text-2xl font-semibold text-[#2B2620]">
+        <h1 className="font-serif text-2xl text-[#F7F4EC]">
           Welcome{profile?.full_name ? `, ${profile.full_name}` : ''}
         </h1>
-        <p className="text-sm text-[#6B6354] mt-1">Your saved libraries</p>
+        <p className="text-sm text-[#A8A296] mt-1">Your saved libraries</p>
 
         <div className="mt-6">
           {savedLibraries.length === 0 ? (
-            <div className="text-center py-16 bg-white border border-[#E5DFD0] rounded-lg">
-              <p className="text-[#6B6354] font-medium">No saved libraries yet</p>
-              <p className="text-sm text-[#9A8F73] mt-1">
+            <div className="text-center py-16 bg-[#1F1B16] border border-[#332D24] rounded-lg">
+              <p className="text-[#A8A296] font-medium">No saved libraries yet</p>
+              <p className="text-sm text-[#6B6560] mt-1">
                 Browse{' '}
-                <Link href="/explore" className="underline text-[#2B2620]">
+                <Link href="/explore" className="underline text-[#F7F4EC]">
                   Explore
                 </Link>{' '}
                 and save libraries you want to revisit.
@@ -43,10 +43,10 @@ export default async function DashboardPage() {
                 <Link
                   key={lib.id}
                   href={`/library/${lib.id}`}
-                  className="block bg-white border border-[#E5DFD0] rounded-lg p-4 hover:border-[#C9BFA3] transition-colors"
+                  className="block bg-[#1F1B16] border border-[#332D24] rounded-lg p-4 hover:border-[#FF6B47]/40 transition-colors"
                 >
-                  <h3 className="font-semibold text-[#2B2620]">{lib.name}</h3>
-                  <p className="text-sm text-[#6B6354] mt-0.5">{lib.address}</p>
+                  <h3 className="font-serif text-[#F7F4EC]">{lib.name}</h3>
+                  <p className="text-sm text-[#A8A296] mt-0.5">{lib.address}</p>
                 </Link>
               ))}
             </div>

@@ -2,105 +2,109 @@ import Link from 'next/link'
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-[#FAF7F0]">
-      {/* Hero */}
+    <div className="min-h-screen bg-[#15130F]">
       <section className="px-6 pt-16 pb-20 md:pt-24 md:pb-28">
         <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           <div>
-            <p className="text-xs font-medium tracking-widest text-[#B5482F] uppercase mb-4">
+            <p className="text-xs font-medium tracking-widest text-[#FF6B47] uppercase mb-4">
               Now mapping Uttar Pradesh
             </p>
-            <h1 className="font-serif text-4xl md:text-5xl leading-tight text-[#2B2620]">
-              Find a place to read,
+            <h1 className="font-serif text-4xl md:text-5xl leading-tight text-[#F7F4EC]">
+              Stop guessing if the
               <br />
-              study, or just think.
+              library&apos;s even open.
             </h1>
-            <p className="text-[#6B6354] mt-5 text-base md:text-lg max-w-md">
+            <p className="text-[#A8A296] mt-5 text-base md:text-lg max-w-md">
               Real libraries near you — with pricing, timings, and amenities a
               map pin alone never tells you.
             </p>
             <div className="flex gap-3 mt-8">
               <Link
                 href="/explore"
-                className="bg-[#2B2620] text-[#FAF7F0] px-5 py-3 rounded-md font-medium text-sm hover:bg-[#1F1B16] transition-colors"
+                className="bg-[#FF6B47] text-[#2A1505] px-5 py-3 rounded-md font-medium text-sm hover:opacity-90 transition-opacity"
               >
                 Explore libraries
               </Link>
               <Link
                 href="/signup"
-                className="border border-[#2B2620] text-[#2B2620] px-5 py-3 rounded-md font-medium text-sm hover:bg-[#EFE9DA] transition-colors"
+                className="border border-[#332D24] text-[#F7F4EC] px-5 py-3 rounded-md font-medium text-sm hover:bg-[#1F1B16] transition-colors"
               >
                 Create account
               </Link>
             </div>
           </div>
 
-          {/* Signature element: a "stamped" library card */}
-          <div className="hidden md:flex justify-center">
-            <div className="relative -rotate-2">
-              <div className="bg-white border border-[#E5DFD0] rounded-sm shadow-sm w-72 p-6">
-                <p className="text-[10px] tracking-widest uppercase text-[#9A8F73] border-b border-[#E5DFD0] pb-2 mb-4">
-                  Library Record
-                </p>
-                <p className="font-serif text-lg text-[#2B2620]">Cyber Library</p>
-                <p className="text-xs text-[#6B6354] mt-1">Lucknow, Uttar Pradesh</p>
-
-                <div className="mt-5 space-y-2 text-xs text-[#6B6354]">
-                  <div className="flex justify-between">
-                    <span>Open</span>
-                    <span className="text-[#2B2620]">9 AM – 8 PM</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Pricing</span>
-                    <span className="text-[#2B2620]">₹50 / day</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Amenities</span>
-                    <span className="text-[#2B2620]">WiFi, AC</span>
-                  </div>
-                </div>
+          <div className="hidden md:block">
+            <div className="bg-[#1F1B16] border border-[#332D24] rounded-lg p-6">
+              <div className="flex gap-2 mb-4">
+                <span className="bg-[#FF6B47] text-[#2A1505] text-xs font-medium px-2.5 py-1 rounded">
+                  ₹50/day
+                </span>
+                <span className="bg-[#2DD4A8] text-[#04342C] text-xs font-medium px-2.5 py-1 rounded">
+                  Open now
+                </span>
+                <span className="bg-[#A78BFA] text-[#26215C] text-xs font-medium px-2.5 py-1 rounded">
+                  WiFi
+                </span>
               </div>
-
-              <div className="absolute -bottom-4 -right-4 rotate-12 border-2 border-[#B5482F] text-[#B5482F] text-xs font-bold tracking-wider px-3 py-1 rounded-sm bg-[#FAF7F0]">
-                VERIFIED
+              <div className="border-l-2 border-[#FF6B47] pl-4">
+                <p className="font-serif text-lg text-[#F7F4EC]">Cyber Library</p>
+                <p className="text-xs text-[#A8A296] mt-1">Lucknow, Uttar Pradesh — verified</p>
+              </div>
+              <div className="mt-5 pt-5 border-t border-[#332D24] space-y-2 text-xs text-[#A8A296]">
+                <div className="flex justify-between">
+                  <span>Hours</span>
+                  <span className="text-[#F7F4EC]">9 AM – 8 PM</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Owner</span>
+                  <span className="text-[#F7F4EC]">Verified listing</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* What it actually does */}
-      <section className="px-6 py-16 border-t border-[#E5DFD0]">
+      <section className="px-6 py-16 border-t border-[#332D24]">
         <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-10">
           <div>
-            <p className="font-serif text-xl text-[#2B2620]">Pricing, upfront</p>
-            <p className="text-sm text-[#6B6354] mt-2">
+            <span className="inline-block bg-[#FF6B47] text-[#2A1505] text-xs font-medium px-2 py-1 rounded mb-3">
+              Pricing
+            </span>
+            <p className="font-serif text-xl text-[#F7F4EC]">No surprise costs</p>
+            <p className="text-sm text-[#A8A296] mt-2">
               See what a seat actually costs before you make the trip.
             </p>
           </div>
           <div>
-            <p className="font-serif text-xl text-[#2B2620]">Real timings</p>
-            <p className="text-sm text-[#6B6354] mt-2">
-              No more showing up to a locked gate. Hours, verified.
+            <span className="inline-block bg-[#2DD4A8] text-[#04342C] text-xs font-medium px-2 py-1 rounded mb-3">
+              Timings
+            </span>
+            <p className="font-serif text-xl text-[#F7F4EC]">No locked gates</p>
+            <p className="text-sm text-[#A8A296] mt-2">
+              Hours that are actually verified, not guessed from a map listing.
             </p>
           </div>
           <div>
-            <p className="font-serif text-xl text-[#2B2620]">Amenities that matter</p>
-            <p className="text-sm text-[#6B6354] mt-2">
-              WiFi, quiet zones, seating — know before you go.
+            <span className="inline-block bg-[#A78BFA] text-[#26215C] text-xs font-medium px-2 py-1 rounded mb-3">
+              Amenities
+            </span>
+            <p className="font-serif text-xl text-[#F7F4EC]">Know before you go</p>
+            <p className="text-sm text-[#A8A296] mt-2">
+              WiFi, quiet zones, seating — the details that decide if it's worth the trip.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Closing CTA */}
-      <section className="px-6 py-16 border-t border-[#E5DFD0] text-center">
-        <p className="font-serif text-2xl text-[#2B2620] max-w-md mx-auto">
+      <section className="px-6 py-16 border-t border-[#332D24] text-center">
+        <p className="font-serif text-2xl text-[#F7F4EC] max-w-md mx-auto">
           Your next study spot is closer than you think.
         </p>
         <Link
           href="/explore"
-          className="inline-block mt-6 bg-[#2B2620] text-[#FAF7F0] px-6 py-3 rounded-md font-medium text-sm hover:bg-[#1F1B16] transition-colors"
+          className="inline-block mt-6 bg-[#FF6B47] text-[#2A1505] px-6 py-3 rounded-md font-medium text-sm hover:opacity-90 transition-opacity"
         >
           Start exploring
         </Link>

@@ -8,10 +8,10 @@ export default function ExploreClient({ libraries }: { libraries: Library[] }) {
   const [view, setView] = useState<'list' | 'map'>('list')
 
   return (
-    <div className="min-h-screen bg-[#FAF7F0]">
-      <header className="border-b border-[#E5DFD0] px-6 py-5">
-        <h1 className="text-2xl font-semibold text-[#2B2620]">Explore Libraries</h1>
-        <p className="text-sm text-[#6B6354] mt-1">
+    <div className="min-h-screen bg-[#15130F]">
+      <header className="border-b border-[#332D24] px-6 py-5">
+        <h1 className="font-serif text-2xl text-[#F7F4EC]">Explore Libraries</h1>
+        <p className="text-sm text-[#A8A296] mt-1">
           {libraries.length} {libraries.length === 1 ? 'library' : 'libraries'} found
         </p>
       </header>
@@ -21,8 +21,8 @@ export default function ExploreClient({ libraries }: { libraries: Library[] }) {
           onClick={() => setView('list')}
           className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
             view === 'list'
-              ? 'bg-[#2B2620] text-[#FAF7F0]'
-              : 'bg-transparent text-[#6B6354] hover:bg-[#EFE9DA]'
+              ? 'bg-[#FF6B47] text-[#2A1505]'
+              : 'bg-transparent text-[#A8A296] hover:bg-[#1F1B16]'
           }`}
         >
           List
@@ -31,8 +31,8 @@ export default function ExploreClient({ libraries }: { libraries: Library[] }) {
           onClick={() => setView('map')}
           className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
             view === 'map'
-              ? 'bg-[#2B2620] text-[#FAF7F0]'
-              : 'bg-transparent text-[#6B6354] hover:bg-[#EFE9DA]'
+              ? 'bg-[#FF6B47] text-[#2A1505]'
+              : 'bg-transparent text-[#A8A296] hover:bg-[#1F1B16]'
           }`}
         >
           Map
@@ -41,14 +41,14 @@ export default function ExploreClient({ libraries }: { libraries: Library[] }) {
 
       <main className="px-6 pb-10">
         {libraries.length === 0 ? (
-          <div className="text-center py-20 text-[#6B6354]">
+          <div className="text-center py-20 text-[#A8A296]">
             <p className="text-lg font-medium">No libraries found yet</p>
             <p className="text-sm mt-1">Run the ingestion script to add libraries for your area.</p>
           </div>
         ) : view === 'list' ? (
           <LibraryList libraries={libraries} />
         ) : (
-          <div className="text-center py-20 text-[#6B6354] bg-white border border-[#E5DFD0] rounded-lg">
+          <div className="text-center py-20 text-[#A8A296] bg-[#1F1B16] border border-[#332D24] rounded-lg">
             <p className="text-lg font-medium">Map view coming soon</p>
             <p className="text-sm mt-1">Browse the list for now — pins are on the way.</p>
           </div>

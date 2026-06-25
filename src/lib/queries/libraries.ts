@@ -54,6 +54,7 @@ export async function getLibraryById(id: string): Promise<LibraryWithDetails | n
     console.error('Error fetching library:', error.message)
     return null
   }
+  
 
   return {
     ...data,
@@ -61,4 +62,25 @@ export async function getLibraryById(id: string): Promise<LibraryWithDetails | n
       ? data.library_details[0] ?? null
       : data.library_details,
   } as LibraryWithDetails
+}
+export async function getSavedLibraries(userId: string): Promise<Library[]> {
+  const supabase = await createClient()
+  const { data, error } = await supabase
+    .from('saved_libraries')
+    .select(`
+      library_id,
+      libraries (
+        id, name, address, district, state, lat, lng, google_rating
+      )
+    `)
+    .eq('user_id', userId)
+
+  if (error) {
+    console.error('Error fetching saved libraries:', error.message)
+    return []
+  }
+
+  return data
+    .map((row) => (Array.isArray(row.libraries) ? row.libraries[0] : row.libraries))
+    .filter((lib): lib is Library => lib != null)
 }

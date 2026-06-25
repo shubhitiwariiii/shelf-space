@@ -26,12 +26,13 @@ Find libraries with **pricing, timings, amenities, ratings, and real-time locati
 
 ## 📸 Project Preview
 
-> Replace these images with your screenshots.
 
 ### 🏠 Landing Page
 
 <p align="center">
-<img src="./public/readme/landing.png" width="90%">
+<img width="1350" height="639" alt="Screenshot 2026-06-25 201419" src="https://github.com/user-attachments/assets/20ea3bde-dd5a-429c-9a80-99edf4552c8f" />
+<img width="1349" height="629" alt="Screenshot 2026-06-25 201450" src="https://github.com/user-attachments/assets/089bffb9-bd7b-4134-b3e8-8e571380fb5e" />
+
 </p>
 
 ---
@@ -39,7 +40,8 @@ Find libraries with **pricing, timings, amenities, ratings, and real-time locati
 ### 🗺️ Explore Libraries
 
 <p align="center">
-<img src="./public/readme/explore.png" width="90%">
+<img width="1350" height="637" alt="Screenshot 2026-06-25 201525" src="https://github.com/user-attachments/assets/8a56bae4-629d-4a98-808d-aad1c3e41a68" />
+
 </p>
 
 ---
@@ -47,15 +49,18 @@ Find libraries with **pricing, timings, amenities, ratings, and real-time locati
 ### 📖 Library Details
 
 <p align="center">
-<img src="./public/readme/details.png" width="90%">
+<img width="1350" height="633" alt="Screenshot 2026-06-25 201720" src="https://github.com/user-attachments/assets/87dd98d8-4541-49f1-8b2a-0c6177700b54" />
+
 </p>
 
 ---
 
-### ❤️ Saved Libraries Dashboard
+### Login/Signup
 
 <p align="center">
-<img src="./public/readme/dashboard.png" width="90%">
+<img width="1350" height="631" alt="Screenshot 2026-06-25 201913" src="https://github.com/user-attachments/assets/bb98e0f1-984b-4586-9c6b-dbee2c7dd0b7" />
+<img width="1352" height="630" alt="Screenshot 2026-06-25 201931" src="https://github.com/user-attachments/assets/5d3c5b73-073a-42a0-a128-8f48d9eacf9c" />
+
 </p>
 
 ---

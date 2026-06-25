@@ -26,14 +26,12 @@ Find libraries with **pricing, timings, amenities, ratings, and real-time locati
 
 ## 📸 Project Preview
 
+> Replace these images with your screenshots.
+
 ### 🏠 Landing Page
 
 <p align="center">
-<img width="1350" height="639" alt="image" src="https://github.com/user-attachments/assets/60b0ca80-a722-4966-9dd2-8e9f8d791813" />
-<img width="1349" height="629" alt="image" src="https://github.com/user-attachments/assets/7ef68101-43dc-4959-969b-1a8454a3c042" />
-
-
-
+<img src="./public/readme/landing.png" width="90%">
 </p>
 
 ---
@@ -41,8 +39,7 @@ Find libraries with **pricing, timings, amenities, ratings, and real-time locati
 ### 🗺️ Explore Libraries
 
 <p align="center">
-<img width="1350" height="637" alt="image" src="https://github.com/user-attachments/assets/c29668ac-6bbe-40bc-ab4c-c9f7dc49a223" />
-
+<img src="./public/readme/explore.png" width="90%">
 </p>
 
 ---
@@ -50,19 +47,15 @@ Find libraries with **pricing, timings, amenities, ratings, and real-time locati
 ### 📖 Library Details
 
 <p align="center">
-<img width="1350" height="633" alt="image" src="https://github.com/user-attachments/assets/8414db71-3d88-47e3-8425-9c0d1b029ed1" />
-
+<img src="./public/readme/details.png" width="90%">
 </p>
 
 ---
 
-### Login/signup
+### ❤️ Saved Libraries Dashboard
 
 <p align="center">
-<img width="1350" height="631" alt="image" src="https://github.com/user-attachments/assets/b37ca3fa-5892-4a0b-9e50-55e4e033b42a" />
-<img width="1352" height="630" alt="image" src="https://github.com/user-attachments/assets/bf2dab23-89dd-49e1-afa9-a59dcb76d071" />
-
-
+<img src="./public/readme/dashboard.png" width="90%">
 </p>
 
 ---
@@ -110,29 +103,32 @@ The project is built around a scalable data ingestion pipeline, allowing new dis
 
 # 🏗 Architecture
 
-               🌍 OpenStreetMap
-                      │
-          ┌───────────┴───────────┐
-          │                       │
-   Overpass API             Nominatim
-          │                       │
-          └───────────┬───────────┘
-                      │
-          ⚙️ Data Ingestion Script
-                      │
-                 UPSERT DATA
-                      │
-          🗄️ Supabase PostgreSQL
-       ┌────────┼──────────┬─────────┐
-       │        │          │         │
-  Libraries  Details   Profiles   Bookmarks
-       └────────┼──────────┴─────────┘
-                │
-         ⚡ Next.js Application
-      ┌─────────┼─────────┬─────────┐
-      │         │         │         │
-   Landing   Explore   Details   Dashboard
-   
+```text
+                    OpenStreetMap
+                  (Overpass API)
+                         │
+               Nominatim Geocoder
+                         │
+          scripts/fetch-libraries.ts
+                         │
+                      Upsert
+                         │
+                ┌─────────────────┐
+                │    Supabase      │
+                │ PostgreSQL + RLS │
+                └───────┬──────────┘
+                        │
+        ┌───────────────┼───────────────┐
+        │               │               │
+   Authentication   Library Data    Saved Libraries
+        │               │               │
+        └───────────────┴───────────────┘
+                        │
+                 Next.js Application
+                        │
+      Landing → Explore → Details → Dashboard
+```
+
 ---
 
 # 🗄 Database Schema
@@ -174,42 +170,34 @@ uuid library_id
 
 ---
 
-
 ## 📂 Folder Structure
 
 ```text
 ShelfSpace
 │
-├── app/
-│   ├── (auth)/
-│   ├── dashboard/
-│   ├── explore/
-│   ├── library/
-│   └── api/
+├── app
+│   ├── explore
+│   ├── dashboard
+│   ├── library
+│   └── auth
 │
-├── components/
+├── components
 │
-├── lib/
+├── lib
 │
-├── scripts/
+├── scripts
 │   └── fetch-libraries.ts
 │
-├── public/
-│   └── readme/
-│       ├── landing.png
-│       ├── explore.png
-│       ├── details.png
-│       └── dashboard.png
+├── public
+│   └── readme
 │
-├── supabase/
-│   ├── schema.sql
-│   └── seed.sql
+├── supabase
+│   └── schema.sql
 │
 ├── package.json
-├── tsconfig.json
-├── next.config.js
 └── README.md
 ```
+
 ---
 
 # ⚡ Engineering Highlights
@@ -332,8 +320,6 @@ http://localhost:3000
 
 **Shubhi Tiwari**
 
-B.Tech CSE (AI & ML)
-
 <p>
 <a href="https://github.com/shubhitiwariiii">
 <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github">
@@ -350,6 +336,6 @@ B.Tech CSE (AI & ML)
 
 ## ⭐ If you found this project useful, please consider giving it a star!
 
-Made with ❤️ using Next.js, TypeScript, Tailwind CSS & Supabase.
+Made with ❤️ 
 
 </div>

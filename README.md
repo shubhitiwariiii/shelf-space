@@ -110,32 +110,29 @@ The project is built around a scalable data ingestion pipeline, allowing new dis
 
 # 🏗 Architecture
 
-```text
-                    OpenStreetMap
-                  (Overpass API)
-                         │
-               Nominatim Geocoder
-                         │
-          scripts/fetch-libraries.ts
-                         │
-                      Upsert
-                         │
-                ┌─────────────────┐
-                │    Supabase      │
-                │ PostgreSQL + RLS │
-                └───────┬──────────┘
-                        │
-        ┌───────────────┼───────────────┐
-        │               │               │
-   Authentication   Library Data    Saved Libraries
-        │               │               │
-        └───────────────┴───────────────┘
-                        │
-                 Next.js Application
-                        │
-      Landing → Explore → Details → Dashboard
-```
-
+               🌍 OpenStreetMap
+                      │
+          ┌───────────┴───────────┐
+          │                       │
+   Overpass API             Nominatim
+          │                       │
+          └───────────┬───────────┘
+                      │
+          ⚙️ Data Ingestion Script
+                      │
+                 UPSERT DATA
+                      │
+          🗄️ Supabase PostgreSQL
+       ┌────────┼──────────┬─────────┐
+       │        │          │         │
+  Libraries  Details   Profiles   Bookmarks
+       └────────┼──────────┴─────────┘
+                │
+         ⚡ Next.js Application
+      ┌─────────┼─────────┬─────────┐
+      │         │         │         │
+   Landing   Explore   Details   Dashboard
+   
 ---
 
 # 🗄 Database Schema
@@ -177,34 +174,42 @@ uuid library_id
 
 ---
 
+
 ## 📂 Folder Structure
 
 ```text
 ShelfSpace
 │
-├── app
-│   ├── explore
-│   ├── dashboard
-│   ├── library
-│   └── auth
+├── app/
+│   ├── (auth)/
+│   ├── dashboard/
+│   ├── explore/
+│   ├── library/
+│   └── api/
 │
-├── components
+├── components/
 │
-├── lib
+├── lib/
 │
-├── scripts
+├── scripts/
 │   └── fetch-libraries.ts
 │
-├── public
-│   └── readme
+├── public/
+│   └── readme/
+│       ├── landing.png
+│       ├── explore.png
+│       ├── details.png
+│       └── dashboard.png
 │
-├── supabase
-│   └── schema.sql
+├── supabase/
+│   ├── schema.sql
+│   └── seed.sql
 │
 ├── package.json
+├── tsconfig.json
+├── next.config.js
 └── README.md
 ```
-
 ---
 
 # ⚡ Engineering Highlights

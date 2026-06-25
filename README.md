@@ -26,8 +26,6 @@ Find libraries with **pricing, timings, amenities, ratings, and real-time locati
 
 ## 📸 Project Preview
 
-> Replace these images with your screenshots.
-
 ### 🏠 Landing Page
 
 <p align="center">
@@ -52,15 +50,19 @@ Find libraries with **pricing, timings, amenities, ratings, and real-time locati
 ### 📖 Library Details
 
 <p align="center">
-<img src="./public/readme/details.png" width="90%">
+<img width="1350" height="633" alt="image" src="https://github.com/user-attachments/assets/8414db71-3d88-47e3-8425-9c0d1b029ed1" />
+
 </p>
 
 ---
 
-### ❤️ Saved Libraries Dashboard
+### Login/signup
 
 <p align="center">
-<img src="./public/readme/dashboard.png" width="90%">
+<img width="1350" height="631" alt="image" src="https://github.com/user-attachments/assets/b37ca3fa-5892-4a0b-9e50-55e4e033b42a" />
+<img width="1352" height="630" alt="image" src="https://github.com/user-attachments/assets/bf2dab23-89dd-49e1-afa9-a59dcb76d071" />
+
+
 </p>
 
 ---

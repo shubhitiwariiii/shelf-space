@@ -40,7 +40,7 @@ Find libraries with **pricing, timings, amenities, ratings, and real-time locati
 ### 🗺️ Explore Libraries
 
 <p align="center">
-<img width="1350" height="637" alt="Screenshot 2026-06-25 201525" src="https://github.com/user-attachments/assets/8a56bae4-629d-4a98-808d-aad1c3e41a68" />
+<img width="1365" height="633" alt="image" src="https://github.com/user-attachments/assets/d67d45de-6f80-4b22-bdc5-9e971631197c" />
 
 </p>
 

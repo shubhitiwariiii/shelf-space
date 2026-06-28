@@ -12,6 +12,24 @@ export interface Library {
   google_rating: number | null
 }
 
+export interface LibraryDetails {
+  owner_name: string | null
+  owner_contact: string | null
+  pricing_info: string | null
+  timings: Record<string, string> | null
+  amenities: string[] | null
+}
+
+export interface LibraryWithDetails extends Library {
+  library_details: LibraryDetails | null
+}
+
+export interface DashboardStats {
+  savedCount: number
+  districtsCount: number
+  topDistrict: string | null
+}
+
 export async function getLibraries(): Promise<Library[]> {
   const supabase = await createClient()
   const { data, error } = await supabase
@@ -27,25 +45,12 @@ export async function getLibraries(): Promise<Library[]> {
   return data ?? []
 }
 
-
-export interface LibraryDetails {
-  owner_name: string | null
-  owner_contact: string | null
-  pricing_info: string | null
-  timings: Record<string, string> | null
-  amenities: string[] | null
-}
-
-export interface LibraryWithDetails extends Library {
-  library_details: LibraryDetails | null
-}
-
 export async function getLibraryById(id: string): Promise<LibraryWithDetails | null> {
   const supabase = await createClient()
   const { data, error } = await supabase
     .from('libraries')
     .select(`
-      id, name, address, district, state, lat, lng, google_rating,
+      id, name, address, district, locality, state, lat, lng, google_rating,
       library_details (
         owner_name, owner_contact, pricing_info, timings, amenities
       )
@@ -57,7 +62,6 @@ export async function getLibraryById(id: string): Promise<LibraryWithDetails | n
     console.error('Error fetching library:', error.message)
     return null
   }
-  
 
   return {
     ...data,
@@ -66,6 +70,7 @@ export async function getLibraryById(id: string): Promise<LibraryWithDetails | n
       : data.library_details,
   } as LibraryWithDetails
 }
+
 export async function getSavedLibraries(userId: string): Promise<Library[]> {
   const supabase = await createClient()
   const { data, error } = await supabase
@@ -73,7 +78,7 @@ export async function getSavedLibraries(userId: string): Promise<Library[]> {
     .select(`
       library_id,
       libraries (
-        id, name, address, district, state, lat, lng, google_rating
+        id, name, address, district, locality, state, lat, lng, google_rating
       )
     `)
     .eq('user_id', userId)
@@ -86,12 +91,6 @@ export async function getSavedLibraries(userId: string): Promise<Library[]> {
   return data
     .map((row) => (Array.isArray(row.libraries) ? row.libraries[0] : row.libraries))
     .filter((lib): lib is Library => lib != null)
-}
-
-export interface DashboardStats {
-  savedCount: number
-  districtsCount: number
-  topDistrict: string | null
 }
 
 export async function getDashboardStats(userId: string): Promise<DashboardStats> {
@@ -117,3 +116,4 @@ export async function getDashboardStats(userId: string): Promise<DashboardStats>
     topDistrict,
   }
 }
+

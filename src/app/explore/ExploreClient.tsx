@@ -1,9 +1,19 @@
 'use client'
 
-import LibraryMap from './LibraryMap'
+
 import { useState, useMemo } from 'react'
+import dynamic from 'next/dynamic'
 import type { Library } from '@/lib/queries/libraries'
 import LibraryList from './LibraryList'
+
+const LibraryMap = dynamic(() => import('./LibraryMap'), {
+  ssr: false,
+  loading: () => (
+    <div className="text-center py-20 text-[#A8A296] bg-[#1F1B16] border border-[#332D24] rounded-lg">
+      Loading map...
+    </div>
+  ),
+})
 
 export default function ExploreClient({ libraries }: { libraries: Library[] }) {
   const [view, setView] = useState<'list' | 'map'>('list')

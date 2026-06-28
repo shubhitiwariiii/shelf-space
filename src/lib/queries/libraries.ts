@@ -5,6 +5,7 @@ export interface Library {
   name: string
   address: string
   district: string
+  locality: string | null
   state: string
   lat: number
   lng: number
@@ -15,7 +16,7 @@ export async function getLibraries(): Promise<Library[]> {
   const supabase = await createClient()
   const { data, error } = await supabase
     .from('libraries')
-    .select('id, name, address, district, state, lat, lng, google_rating')
+    .select('id, name, address, district, locality, state, lat, lng, google_rating')
     .order('name')
 
   if (error) {
@@ -25,6 +26,8 @@ export async function getLibraries(): Promise<Library[]> {
 
   return data ?? []
 }
+
+
 export interface LibraryDetails {
   owner_name: string | null
   owner_contact: string | null

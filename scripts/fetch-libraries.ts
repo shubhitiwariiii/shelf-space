@@ -1,38 +1,44 @@
-import { createClient } from '@supabase/supabase-js'
-import dotenv from 'dotenv'
+import { createClient } from "@supabase/supabase-js";
+import dotenv from "dotenv";
 
-dotenv.config({ path: '.env.local' })
+dotenv.config({ path: ".env.local" });
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SECRET_KEY!
-)
+  process.env.SUPABASE_SECRET_KEY!,
+);
 
 // Areas to search — add more districts as you expand
 const AREAS = [
-  { name: 'Lucknow', state: 'Uttar Pradesh' },
-  { name: 'Greater Noida', state: 'Uttar Pradesh' },
-]
+  { name: "Lucknow", state: "Uttar Pradesh" },
+  { name: "Greater Noida", state: "Uttar Pradesh" },
+];
 
 interface OverpassElement {
-  id: number
-  lat?: number
-  lon?: number
-  center?: { lat: number; lon: number }
-  tags?: Record<string, string>
+  id: number;
+  lat?: number;
+  lon?: number;
+  center?: { lat: number; lon: number };
+  tags?: Record<string, string>;
 }
 
-async function resolveAreaCoords(areaName: string): Promise<{ lat: number; lon: number } | null> {
+async function resolveAreaCoords(
+  areaName: string,
+): Promise<{ lat: number; lon: number } | null> {
   const res = await fetch(
     `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(areaName)}&format=json&limit=1`,
-    { headers: { 'User-Agent': 'library-finder-app' } }
-  )
-  const data = await res.json()
-  if (!data[0]) return null
-  return { lat: parseFloat(data[0].lat), lon: parseFloat(data[0].lon) }
+    { headers: { "User-Agent": "library-finder-app" } },
+  );
+  const data = await res.json();
+  if (!data[0]) return null;
+  return { lat: parseFloat(data[0].lat), lon: parseFloat(data[0].lon) };
 }
 
-async function fetchLibrariesNear(lat: number, lon: number, radius = 15000): Promise<OverpassElement[]> {
+async function fetchLibrariesNear(
+  lat: number,
+  lon: number,
+  radius = 15000,
+): Promise<OverpassElement[]> {
   const query = `
     [out:json][timeout:25];
     (
@@ -40,30 +46,49 @@ async function fetchLibrariesNear(lat: number, lon: number, radius = 15000): Pro
       way["amenity"="library"](around:${radius},${lat},${lon});
     );
     out center;
-  `
+  `;
 
-  const res = await fetch('https://overpass-api.de/api/interpreter', {
-    method: 'POST',
+  const res = await fetch("https://overpass-api.de/api/interpreter", {
+    method: "POST",
     headers: {
-      'Content-Type': 'text/plain',
-      'User-Agent': 'library-finder-app (student project)',
+      "Content-Type": "text/plain",
+      "User-Agent": "library-finder-app (student project)",
     },
     body: query,
-  })
+  });
 
   if (!res.ok) {
-    console.error(`Overpass error: ${res.status}`)
-    return []
+    console.error(`Overpass error: ${res.status}`);
+    return [];
   }
 
-  const data = await res.json()
-  return data.elements || []
+  const data = await res.json();
+  return data.elements || [];
 }
 
-function buildAddress(tags: Record<string, string> | undefined, fallback: string): string {
-  if (!tags) return fallback
-  const parts = [tags['addr:housenumber'], tags['addr:street'], tags['addr:city']].filter(Boolean)
-  return parts.length ? parts.join(', ') : fallback
+function buildAddress(
+  tags: Record<string, string> | undefined,
+  fallback: string,
+): string {
+  if (!tags) return fallback;
+  const parts = [
+    tags["addr:housenumber"],
+    tags["addr:street"],
+    tags["addr:city"],
+  ].filter(Boolean);
+  return parts.length ? parts.join(", ") : fallback;
+}
+
+function extractLocality(
+  tags: Record<string, string> | undefined,
+): string | null {
+  if (!tags) return null;
+  return (
+    tags["addr:suburb"] ||
+    tags["addr:neighbourhood"] ||
+    tags["addr:quarter"] ||
+    null
+  );
 }
 
 async function main() {
@@ -80,6 +105,7 @@ async function main() {
     console.log(`Found ${elements.length} raw results`)
 
     let saved = 0
+    let withLocality = 0
     for (const el of elements) {
       const lat = el.lat ?? el.center?.lat
       const lon = el.lon ?? el.center?.lon
@@ -87,6 +113,8 @@ async function main() {
 
       const name = el.tags?.name || 'Unnamed Library'
       const address = buildAddress(el.tags, area.name)
+      const locality = extractLocality(el.tags)
+      if (locality) withLocality++
 
       const { error } = await supabase.from('libraries').upsert(
         {
@@ -94,6 +122,7 @@ async function main() {
           name,
           address,
           district: area.name,
+          locality,
           state: area.state,
           lat,
           lng: lon,
@@ -106,12 +135,12 @@ async function main() {
         console.error(`Failed: ${name} —`, error.message)
       } else {
         saved++
-        console.log(`Saved: ${name}`)
+        console.log(`Saved: ${name}${locality ? ` (${locality})` : ''}`)
       }
     }
 
-    console.log(`${area.name}: ${saved} libraries saved`)
-    await new Promise((resolve) => setTimeout(resolve, 2000)) // be polite to the free API
+    console.log(`${area.name}: ${saved} libraries saved, ${withLocality} with locality data`)
+    await new Promise((resolve) => setTimeout(resolve, 2000))
   }
 
   console.log('\nDone.')

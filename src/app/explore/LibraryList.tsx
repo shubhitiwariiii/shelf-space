@@ -1,5 +1,6 @@
 import type { Library } from '@/lib/queries/libraries'
 import Link from 'next/link'
+import SaveIconButton from '@/components/SaveIconButton'
 
 export default function LibraryList({ libraries }: { libraries: Library[] }) {
   return (
@@ -10,10 +11,14 @@ export default function LibraryList({ libraries }: { libraries: Library[] }) {
           href={`/library/${lib.id}`}
           className="group relative block bg-[#1F1B16] border border-[#332D24] rounded-lg p-5 hover:border-[#FF6B47] transition-colors"
         >
-          <p className="text-[10px] tracking-widest uppercase text-[#FF6B47] mb-2">
+          <div className="absolute top-4 right-4">
+            <SaveIconButton libraryId={lib.id} />
+          </div>
+
+          <p className="text-[10px] tracking-widest uppercase text-[#FF6B47] mb-2 pr-10">
             {lib.locality || lib.district}
           </p>
-          <h3 className="font-serif text-lg text-[#F7F4EC] group-hover:text-white transition-colors">
+          <h3 className="font-serif text-lg text-[#F7F4EC] group-hover:text-white transition-colors pr-10">
             {lib.name}
           </h3>
           <p className="text-xs text-[#6B6560] mt-3">

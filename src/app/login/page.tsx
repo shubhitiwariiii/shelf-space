@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 
 export default function LoginPage() {
@@ -11,6 +11,7 @@ export default function LoginPage() {
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const router = useRouter()
+  const searchParams = useSearchParams()
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault()
@@ -18,7 +19,7 @@ export default function LoginPage() {
     setError(null)
 
     const supabase = createClient()
-    const { error: loginError } = await supabase.auth.signInWithPassword({ email, password })
+    const { data, error: loginError } = await supabase.auth.signInWithPassword({ email, password })
 
     if (loginError) {
       setError(loginError.message)
@@ -26,7 +27,19 @@ export default function LoginPage() {
       return
     }
 
-    router.push('/dashboard')
+    const saveLibraryId = searchParams.get('save')
+    const redirectTo = searchParams.get('redirect') || '/dashboard'
+
+    if (saveLibraryId && data.user) {
+      await supabase
+        .from('saved_libraries')
+        .insert({ user_id: data.user.id, library_id: saveLibraryId })
+        .select()
+        .maybeSingle()
+      // Ignore errors here (e.g. already saved) — not worth blocking the redirect over
+    }
+
+    router.push(redirectTo)
     router.refresh()
   }
 

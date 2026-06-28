@@ -1,6 +1,7 @@
 import { getLibraryById } from '@/lib/queries/libraries'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import SaveButton from '@/components/SaveIconButton'
 
 export default async function LibraryDetailPage({
   params,
@@ -30,11 +31,14 @@ export default async function LibraryDetailPage({
                 {library.district}, {library.state}
               </p>
             </div>
-            {library.google_rating && (
-              <span className="text-sm font-medium text-[#04342C] bg-[#2DD4A8] px-3 py-1.5 rounded">
-                ★ {library.google_rating}
-              </span>
-            )}
+            <div className="flex flex-col items-end gap-2">
+              {library.google_rating && (
+                <span className="text-sm font-medium text-[#04342C] bg-[#2DD4A8] px-3 py-1.5 rounded">
+                  ★ {library.google_rating}
+                </span>
+              )}
+              <SaveButton libraryId={library.id} />
+            </div>
           </div>
 
           <div className="mt-6 border-t border-[#332D24] pt-6 grid gap-4">

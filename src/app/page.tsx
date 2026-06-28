@@ -1,6 +1,11 @@
 import Link from 'next/link'
+import { getLibraries } from '@/lib/queries/libraries'
 
-export default function HomePage() {
+export default async function HomePage() {
+  const libraries = await getLibraries()
+  const districtCount = new Set(libraries.map((lib) => lib.district)).size
+  const previewLibraries = libraries.slice(0, 3)
+
   return (
     <div className="min-h-screen bg-[#15130F]">
       <section className="px-6 pt-16 pb-20 md:pt-24 md:pb-28">
@@ -29,6 +34,22 @@ export default function HomePage() {
               >
                 Create account
               </Link>
+            </div>
+
+            {/* Live stats */}
+            <div className="flex gap-6 mt-8 pt-6 border-t border-[#332D24]">
+              <div>
+                <p className="font-serif text-2xl text-[#F7F4EC]">{libraries.length}</p>
+                <p className="text-xs text-[#6B6560] mt-0.5">Libraries mapped</p>
+              </div>
+              <div>
+                <p className="font-serif text-2xl text-[#F7F4EC]">{districtCount}</p>
+                <p className="text-xs text-[#6B6560] mt-0.5">Districts covered</p>
+              </div>
+              <div>
+                <p className="font-serif text-2xl text-[#F7F4EC]">Free</p>
+                <p className="text-xs text-[#6B6560] mt-0.5">Always to browse</p>
+              </div>
             </div>
           </div>
 
@@ -64,6 +85,36 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Real library preview */}
+      {previewLibraries.length > 0 && (
+        <section className="px-6 py-16 border-t border-[#332D24]">
+          <div className="max-w-5xl mx-auto">
+            <div className="flex justify-between items-baseline mb-6">
+              <h2 className="font-serif text-xl text-[#F7F4EC]">Already on ShelfSpace</h2>
+              <Link href="/explore" className="text-sm text-[#FF6B47] hover:underline">
+                View all {libraries.length} →
+              </Link>
+            </div>
+            <div className="grid sm:grid-cols-3 gap-3">
+              {previewLibraries.map((lib) => (
+                <Link
+                  key={lib.id}
+                  href={`/library/${lib.id}`}
+                  className="block bg-[#1F1B16] border border-[#332D24] rounded-lg p-4 hover:border-[#FF6B47] transition-colors"
+                >
+                  <p className="text-[10px] tracking-widest uppercase text-[#FF6B47] mb-2">
+                    {lib.locality || lib.district}
+                  </p>
+                  <p className="font-serif text-[#F7F4EC]">{lib.name}</p>
+                  <p className="text-xs text-[#6B6560] mt-2">{lib.state}</p>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* What it actually does */}
       <section className="px-6 py-16 border-t border-[#332D24]">
         <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-10">
           <div>

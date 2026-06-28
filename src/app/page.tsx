@@ -10,9 +10,7 @@ export default function HomePage() {
               Now mapping Uttar Pradesh
             </p>
             <h1 className="font-serif text-4xl md:text-5xl leading-tight text-[#F7F4EC]">
-              Stop guessing if the
-              <br />
-              library&apos;s even open.
+              Stop guessing if the library&apos;s even open.
             </h1>
             <p className="text-[#A8A296] mt-5 text-base md:text-lg max-w-md">
               Real libraries near you — with pricing, timings, and amenities a

@@ -1,5 +1,6 @@
 'use client'
 
+import LibraryMap from './LibraryMap'
 import { useState, useMemo } from 'react'
 import type { Library } from '@/lib/queries/libraries'
 import LibraryList from './LibraryList'
@@ -78,21 +79,19 @@ export default function ExploreClient({ libraries }: { libraries: Library[] }) {
         <div className="pb-4 flex gap-2">
           <button
             onClick={() => setView('list')}
-            className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-              view === 'list'
-                ? 'bg-[#FF6B47] text-[#2A1505]'
-                : 'bg-transparent text-[#A8A296] hover:bg-[#1F1B16]'
-            }`}
+            className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${view === 'list'
+              ? 'bg-[#FF6B47] text-[#2A1505]'
+              : 'bg-transparent text-[#A8A296] hover:bg-[#1F1B16]'
+              }`}
           >
             List
           </button>
           <button
             onClick={() => setView('map')}
-            className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-              view === 'map'
-                ? 'bg-[#FF6B47] text-[#2A1505]'
-                : 'bg-transparent text-[#A8A296] hover:bg-[#1F1B16]'
-            }`}
+            className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${view === 'map'
+              ? 'bg-[#FF6B47] text-[#2A1505]'
+              : 'bg-transparent text-[#A8A296] hover:bg-[#1F1B16]'
+              }`}
           >
             Map
           </button>
@@ -113,10 +112,7 @@ export default function ExploreClient({ libraries }: { libraries: Library[] }) {
         ) : view === 'list' ? (
           <LibraryList libraries={filteredLibraries} />
         ) : (
-          <div className="text-center py-20 text-[#A8A296] bg-[#1F1B16] border border-[#332D24] rounded-lg">
-            <p className="text-lg font-medium">Map view coming soon</p>
-            <p className="text-sm mt-1">Browse the list for now — pins are on the way.</p>
-          </div>
+          <LibraryMap libraries={filteredLibraries} />
         )}
       </main>
     </div>
@@ -135,11 +131,10 @@ function TabButton({
   return (
     <button
       onClick={onClick}
-      className={`pb-3 px-1 text-sm whitespace-nowrap transition-colors border-b-2 ${
-        active
-          ? 'text-[#F7F4EC] border-[#FF6B47] font-medium'
-          : 'text-[#6B6560] border-transparent hover:text-[#A8A296]'
-      }`}
+      className={`pb-3 px-1 text-sm whitespace-nowrap transition-colors border-b-2 ${active
+        ? 'text-[#F7F4EC] border-[#FF6B47] font-medium'
+        : 'text-[#6B6560] border-transparent hover:text-[#A8A296]'
+        }`}
     >
       {children}
     </button>

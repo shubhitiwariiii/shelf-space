@@ -87,3 +87,33 @@ export async function getSavedLibraries(userId: string): Promise<Library[]> {
     .map((row) => (Array.isArray(row.libraries) ? row.libraries[0] : row.libraries))
     .filter((lib): lib is Library => lib != null)
 }
+
+export interface DashboardStats {
+  savedCount: number
+  districtsCount: number
+  topDistrict: string | null
+}
+
+export async function getDashboardStats(userId: string): Promise<DashboardStats> {
+  const savedLibraries = await getSavedLibraries(userId)
+
+  const districtCounts = new Map<string, number>()
+  savedLibraries.forEach((lib) => {
+    districtCounts.set(lib.district, (districtCounts.get(lib.district) ?? 0) + 1)
+  })
+
+  let topDistrict: string | null = null
+  let maxCount = 0
+  districtCounts.forEach((count, district) => {
+    if (count > maxCount) {
+      maxCount = count
+      topDistrict = district
+    }
+  })
+
+  return {
+    savedCount: savedLibraries.length,
+    districtsCount: districtCounts.size,
+    topDistrict,
+  }
+}

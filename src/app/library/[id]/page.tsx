@@ -1,6 +1,6 @@
 import { getLibraryById } from '@/lib/queries/libraries'
 import { notFound } from 'next/navigation'
-import Link from 'next/link'
+import BackButton from '@/components/BackButton'
 import SaveButton from '@/components/SaveIconButton'
 
 export default async function LibraryDetailPage({
@@ -18,9 +18,7 @@ export default async function LibraryDetailPage({
   return (
     <div className="min-h-screen bg-[#15130F] px-6 py-8">
       <div className="max-w-2xl mx-auto">
-        <Link href="/explore" className="text-sm text-[#A8A296] hover:text-[#F7F4EC]">
-          ← Back to explore
-        </Link>
+        <BackButton />
 
         <div className="mt-4 bg-[#1F1B16] border border-[#332D24] rounded-lg p-6">
           <div className="flex justify-between items-start">

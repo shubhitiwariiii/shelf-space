@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useMemo } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 import dynamic from 'next/dynamic'
 import type { Library } from '@/lib/queries/libraries'
 import { calculateDistance } from '@/lib/distance'
@@ -15,26 +16,41 @@ const LibraryMap = dynamic(() => import('./LibraryMap'), {
   ),
 })
 
+const MAX_DISTANCE_KM = 50
+
 export default function ExploreClient({ libraries }: { libraries: Library[] }) {
+  const router = useRouter()
+  const searchParams = useSearchParams()
+
+  const urlQuery = searchParams.get('q') || ''
+  const urlLat = searchParams.get('lat')
+  const urlLng = searchParams.get('lng')
+
   const [view, setView] = useState<'list' | 'map'>('list')
-  const [districtFilter, setDistrictFilter] = useState<string>('all')
-  const [searchQuery, setSearchQuery] = useState<string>('')
-  const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null)
-  const [locationStatus, setLocationStatus] = useState<'idle' | 'requesting' | 'granted' | 'denied'>('idle')
-  const [sortByDistance, setSortByDistance] = useState(false)
-
-  const districtCounts = useMemo(() => {
-    const counts = new Map<string, number>()
-    libraries.forEach((lib) => {
-      counts.set(lib.district, (counts.get(lib.district) ?? 0) + 1)
-    })
-    return counts
-  }, [libraries])
-
-  const districts = useMemo(
-    () => Array.from(districtCounts.keys()).sort(),
-    [districtCounts]
+  const [searchQuery, setSearchQuery] = useState(urlQuery)
+  const [locationStatus, setLocationStatus] = useState<'idle' | 'requesting' | 'granted' | 'denied'>(
+    urlLat && urlLng ? 'granted' : 'idle'
   )
+
+  const userLocation = useMemo(() => {
+    return urlLat && urlLng ? { lat: parseFloat(urlLat), lng: parseFloat(urlLng) } : null
+  }, [urlLat, urlLng])
+
+  function updateUrl(nextQuery: string, nextLocation: { lat: number; lng: number } | null) {
+    const params = new URLSearchParams()
+    if (nextQuery.trim()) params.set('q', nextQuery.trim())
+    if (nextLocation) {
+      params.set('lat', nextLocation.lat.toString())
+      params.set('lng', nextLocation.lng.toString())
+    }
+    const query = params.toString()
+    router.push(query ? `/explore?${query}` : '/explore', { scroll: false })
+  }
+
+  function handleSearchChange(value: string) {
+    setSearchQuery(value)
+    updateUrl(value, userLocation)
+  }
 
   function requestLocation() {
     if (!('geolocation' in navigator)) {
@@ -46,9 +62,9 @@ export default function ExploreClient({ libraries }: { libraries: Library[] }) {
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        setUserLocation({ lat: position.coords.latitude, lng: position.coords.longitude })
+        const newLocation = { lat: position.coords.latitude, lng: position.coords.longitude }
         setLocationStatus('granted')
-        setSortByDistance(true)
+        updateUrl(searchQuery, newLocation)
       },
       () => {
         setLocationStatus('denied')
@@ -57,54 +73,48 @@ export default function ExploreClient({ libraries }: { libraries: Library[] }) {
     )
   }
 
-  const filteredLibraries = useMemo(() => {
-    const filtered = libraries.filter((lib) => {
-      const matchesDistrict = districtFilter === 'all' || lib.district === districtFilter
+  const hasSearched = searchQuery.trim() !== '' || userLocation !== null
+
+  const results = useMemo(() => {
+    if (!hasSearched) return []
+
+    let filtered = libraries.filter((lib) => {
       const matchesSearch =
         searchQuery.trim() === '' ||
         lib.name.toLowerCase().includes(searchQuery.trim().toLowerCase())
-      return matchesDistrict && matchesSearch
+      return matchesSearch
     })
 
-    if (sortByDistance && userLocation) {
-      return [...filtered].sort((a, b) => {
-        const distA = calculateDistance(userLocation.lat, userLocation.lng, a.lat, a.lng)
-        const distB = calculateDistance(userLocation.lat, userLocation.lng, b.lat, b.lng)
-        return distA - distB
-      })
+    if (userLocation) {
+      filtered = filtered
+        .map((lib) => ({
+          ...lib,
+          distance: calculateDistance(userLocation.lat, userLocation.lng, lib.lat, lib.lng),
+        }))
+        .filter((lib) => lib.distance <= MAX_DISTANCE_KM)
+        .sort((a, b) => a.distance - b.distance)
     }
 
     return filtered
-  }, [libraries, districtFilter, searchQuery, sortByDistance, userLocation])
+  }, [libraries, searchQuery, userLocation, hasSearched])
 
   return (
     <div className="min-h-screen bg-[#15130F]">
       <header className="border-b border-[#332D24] px-6 py-5">
         <h1 className="font-serif text-2xl text-[#F7F4EC]">Explore Libraries</h1>
         <p className="text-sm text-[#A8A296] mt-1">
-          {filteredLibraries.length} of {libraries.length}{' '}
-          {libraries.length === 1 ? 'library' : 'libraries'} shown
-          {searchQuery.trim() !== '' && ` for "${searchQuery.trim()}"`}
+          {hasSearched
+            ? `${results.length} ${results.length === 1 ? 'library' : 'libraries'} found`
+            : 'Search by name or use your location to get started'}
         </p>
       </header>
 
       <div className="px-6 pt-5">
-        <div className="flex gap-6 border-b border-[#332D24] overflow-x-auto">
-          <TabButton active={districtFilter === 'all'} onClick={() => setDistrictFilter('all')}>
-            All ({libraries.length})
-          </TabButton>
-          {districts.map((d) => (
-            <TabButton key={d} active={districtFilter === d} onClick={() => setDistrictFilter(d)}>
-              {d} ({districtCounts.get(d)})
-            </TabButton>
-          ))}
-        </div>
-
         <div className="py-4 max-w-md flex gap-2">
           <input
             type="text"
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={(e) => handleSearchChange(e.target.value)}
             placeholder="Search libraries by name..."
             className="flex-1 bg-[#1F1B16] border border-[#332D24] rounded-md px-4 py-2.5 text-sm text-[#F7F4EC] placeholder:text-[#6B6560] focus:outline-none focus:border-[#FF6B47]"
           />
@@ -112,79 +122,64 @@ export default function ExploreClient({ libraries }: { libraries: Library[] }) {
             onClick={requestLocation}
             disabled={locationStatus === 'requesting'}
             className={`px-4 py-2.5 rounded-md text-sm font-medium whitespace-nowrap transition-colors ${
-              sortByDistance
+              userLocation
                 ? 'bg-[#2DD4A8] text-[#04342C]'
                 : 'bg-[#1F1B16] border border-[#332D24] text-[#A8A296] hover:border-[#FF6B47]'
             }`}
           >
-            {locationStatus === 'requesting' ? 'Locating...' : sortByDistance ? '✓ Near me' : 'Near me'}
+            {locationStatus === 'requesting' ? 'Locating...' : userLocation ? '✓ Near me' : 'Near me'}
           </button>
         </div>
 
-        <div className="pb-4 flex gap-2">
-          <button
-            onClick={() => setView('list')}
-            className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-              view === 'list'
-                ? 'bg-[#FF6B47] text-[#2A1505]'
-                : 'bg-transparent text-[#A8A296] hover:bg-[#1F1B16]'
-            }`}
-          >
-            List
-          </button>
-          <button
-            onClick={() => setView('map')}
-            className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-              view === 'map'
-                ? 'bg-[#FF6B47] text-[#2A1505]'
-                : 'bg-transparent text-[#A8A296] hover:bg-[#1F1B16]'
-            }`}
-          >
-            Map
-          </button>
-        </div>
+        {hasSearched && (
+          <div className="pb-4 flex gap-2">
+            <button
+              onClick={() => setView('list')}
+              className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                view === 'list'
+                  ? 'bg-[#FF6B47] text-[#2A1505]'
+                  : 'bg-transparent text-[#A8A296] hover:bg-[#1F1B16]'
+              }`}
+            >
+              List
+            </button>
+            <button
+              onClick={() => setView('map')}
+              className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                view === 'map'
+                  ? 'bg-[#FF6B47] text-[#2A1505]'
+                  : 'bg-transparent text-[#A8A296] hover:bg-[#1F1B16]'
+              }`}
+            >
+              Map
+            </button>
+          </div>
+        )}
       </div>
 
       <main className="px-6 pb-10">
-        {libraries.length === 0 ? (
+        {!hasSearched ? (
           <div className="text-center py-20 text-[#A8A296]">
-            <p className="text-lg font-medium">No libraries found yet</p>
-            <p className="text-sm mt-1">Run the ingestion script to add libraries for your area.</p>
+            <p className="text-lg font-medium">Find a library to get started</p>
+            <p className="text-sm mt-1">
+              Type a name or tap &quot;Near me&quot; to search nearby.
+            </p>
           </div>
-        ) : filteredLibraries.length === 0 ? (
+        ) : results.length === 0 ? (
           <div className="text-center py-20 text-[#A8A296] bg-[#1F1B16] border border-[#332D24] rounded-lg">
-            <p className="text-lg font-medium">No libraries match this search</p>
-            <p className="text-sm mt-1">Try a different district tab or search term.</p>
+            <p className="text-lg font-medium">No libraries match</p>
+            <p className="text-sm mt-1">
+              {userLocation
+                ? `Nothing found within ${MAX_DISTANCE_KM}km. Try a search term instead.`
+                : 'Try a different search term.'}
+            </p>
           </div>
         ) : view === 'list' ? (
-          <LibraryList libraries={filteredLibraries} userLocation={sortByDistance ? userLocation : null} />
+          <LibraryList libraries={results} userLocation={userLocation} />
         ) : (
-          <LibraryMap libraries={filteredLibraries} />
+          <LibraryMap libraries={results} />
         )}
       </main>
     </div>
-  )
-}
-
-function TabButton({
-  active,
-  onClick,
-  children,
-}: {
-  active: boolean
-  onClick: () => void
-  children: React.ReactNode
-}) {
-  return (
-    <button
-      onClick={onClick}
-      className={`pb-3 px-1 text-sm whitespace-nowrap transition-colors border-b-2 ${
-        active
-          ? 'text-[#F7F4EC] border-[#FF6B47] font-medium'
-          : 'text-[#6B6560] border-transparent hover:text-[#A8A296]'
-      }`}
-    >
-      {children}
-    </button>
   )
 }

@@ -105,30 +105,28 @@ The project is built around a scalable data ingestion pipeline. Adding a new dis
 
 ## 🏗 Architecture
 
-```text
-                    OpenStreetMap
-                  (Overpass API)
-                         │
-               Nominatim Geocoder
-                         │
-          scripts/fetch-libraries.ts
-          (run manually, idempotent upsert)
-                         │
-                ┌─────────────────┐
-                │    Supabase      │
+                 OpenStreetMap
+                 (Overpass API)
+                        │
+                Nominatim Geocoder
+                        │
+        scripts/fetch-libraries.ts
+        (manual, idempotent upsert)
+                        │
+                ┌──────────────────┐
+                │     Supabase     │
                 │ PostgreSQL + RLS │
-                └───────┬──────────┘
+                └──────────────────┘
                         │
         ┌───────────────┼───────────────┐
         │               │               │
-   Authentication   Library Data    Saved Libraries
+ Authentication    Library Data    Saved Libraries
         │               │               │
-        └───────────────┴───────────────┘
+        └───────────────┼───────────────┘
                         │
-                 Next.js Application
+              Next.js Application
                         │
-      Landing → Explore → Details → Dashboard
-```
+   Landing → Explore → Details → Dashboard
 
 ---
 
@@ -179,39 +177,38 @@ saved_libraries {
 
 ## 📂 Folder Structure
 
-```text
+
 ShelfSpace/
-│
 ├── src/
 │   ├── app/
-│   │   ├── explore/          # Search-first library discovery page
-│   │   ├── dashboard/        # Saved libraries + user stats
-│   │   ├── library/[id]/     # Library detail page
+│   │   ├── explore/
+│   │   ├── dashboard/
+│   │   ├── library/
+│   │   │   └── [id]/
 │   │   ├── login/
 │   │   └── signup/
 │   │
 │   ├── components/
 │   │   ├── Navbar.tsx
-│   │   ├── SaveButton.tsx        # Full save button (detail page)
-│   │   ├── SaveIconButton.tsx    # Compact bookmark icon (list cards)
-│   │   ├── BackButton.tsx        # router.back() — preserves explore URL state
-│   │   └── NearbyLibraries.tsx   # Geolocation-based homepage preview
+│   │   ├── SaveButton.tsx
+│   │   ├── SaveIconButton.tsx
+│   │   ├── BackButton.tsx
+│   │   └── NearbyLibraries.tsx
 │   │
-│   └── lib/
-│       ├── supabase/
-│       │   ├── client.ts     # Browser Supabase client
-│       │   └── server.ts     # Server Supabase client (next/headers)
-│       ├── queries/
-│       │   └── libraries.ts  # All DB query functions
-│       └── distance.ts       # Haversine formula (client-safe, no server imports)
-│
-├── scripts/
-│   └── fetch-libraries.ts    # OSM ingestion script
+│   ├── lib/
+│   │   ├── supabase/
+│   │   │   ├── client.ts
+│   │   │   └── server.ts
+│   │   ├── queries/
+│   │   │   └── libraries.ts
+│   │   └── distance.ts
+│   │
+│   └── scripts/
+│       └── fetch-libraries.ts
 │
 ├── public/
 ├── package.json
 └── README.md
-```
 
 ---
 
@@ -296,23 +293,26 @@ Visit `http://localhost:3000`
 - ✅ OpenStreetMap ingestion pipeline
 - ✅ Database schema with RLS policies
 - ✅ Dark editorial landing page with live stats
-- ✅ Geolocation-based "Closest to you" homepage section
-- ✅ Explore page — search-first, geolocation sort, 50km radius filter
-- ✅ Interactive map view (Leaflet + OSM tiles, free)
+- ✅ Geolocation-based "Closest to You" homepage section
+- ✅ Explore page
+  - Search-first interface
+  - Geolocation sorting
+  - 50 km radius filter
+- ✅ Interactive map view (Leaflet + OpenStreetMap tiles)
 - ✅ Library detail pages
-- ✅ Authentication (email/password, Supabase Auth)
-- ✅ Saved libraries dashboard with stats and quick actions
-- ✅ Bookmark from list cards and detail pages
-- ✅ Login-redirect-and-auto-save flow for unauthenticated bookmark clicks
-- ✅ URL-preserved explore state (back navigation restores search context)
+- ✅ Authentication (Email/Password via Supabase Auth)
+- ✅ Saved Libraries dashboard with stats and quick actions
+- ✅ Bookmarking from list cards and detail pages
+- ✅ Login redirect + auto-save flow for unauthenticated bookmarks
+- ✅ URL-preserved Explore state (restores search context on back navigation)
 - ✅ Skeleton loading states across all routes
 - ✅ Mobile responsive
-- ⏳ Manual data enrichment (pricing/timings/owner for existing libraries)
-- ⏳ Locality-level data (column exists, data entry pending)
+
+### 🚧 In Progress
+- ⏳ Manual data enrichment (pricing, timings, owner details)
+- ⏳ Locality-level data (column added, data entry pending)
 - ⏳ Admin enrichment interface
 - ⏳ User reviews and ratings
-- ⏳ "Open now" filter
-- ⏳ Expand coverage beyond Lucknow and Greater Noida
 
 ---
 
@@ -330,8 +330,6 @@ Visit `http://localhost:3000`
 ## 👩‍💻 Author
 
 **Shubhi Tiwari**
-B.Tech CSE (AI & ML) · Galgotias College of Engineering and Technology
-
 <p>
 <a href="https://github.com/shubhitiwariiii">
 <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github">

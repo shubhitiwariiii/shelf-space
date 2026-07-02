@@ -34,7 +34,6 @@ This isn't a demo built on hardcoded data. It's architected around a real ingest
 
 ## ⚡ Engineering Highlights
 
-> The parts that matter to a technical reviewer.
 
 - **Real data pipeline** — OpenStreetMap Overpass API + Nominatim geocoding; not mocked, not hardcoded. Adding a new city means editing one array and rerunning a script — zero application code changes.
 - **Idempotent upserts** — re-running ingestion never creates duplicates, keyed by source ID. Re-run as many times as needed safely.

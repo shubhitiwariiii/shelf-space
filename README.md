@@ -4,35 +4,34 @@
 
 ### Discover Libraries & Study Spaces Near You
 
-Find libraries with **pricing, timings, amenities, ratings, and real-time locations** on an interactive map.
+Find libraries with **pricing, timings, amenities, and real-time location search** on an interactive map.
 
 <p>
-  <img src="https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js">
+  <img src="https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js">
   <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white">
   <img src="https://img.shields.io/badge/TailwindCSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white">
   <img src="https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white">
   <img src="https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white">
   <img src="https://img.shields.io/badge/OpenStreetMap-7EBC6F?style=for-the-badge&logo=openstreetmap&logoColor=white">
+  <img src="https://img.shields.io/badge/Leaflet-199900?style=for-the-badge&logo=leaflet&logoColor=white">
 </p>
 
 <p>
 <a href="#">🌐 Live Demo</a> •
-<a href="https://github.com/shubhitiwariiii/shelfspace">📂 Repository</a> •
-<a href="https://github.com/shubhitiwariiii/shelfspace/issues">🐛 Report Bug</a> •
-<a href="https://github.com/shubhitiwariiii/shelfspace/issues">💡 Request Feature</a>
+<a href="https://github.com/shubhitiwariiii/library-finder">📂 Repository</a> •
+<a href="https://github.com/shubhitiwariiii/library-finder/issues">🐛 Report Bug</a> •
+<a href="https://github.com/shubhitiwariiii/library-finder/issues">💡 Request Feature</a>
 </p>
 
 ---
 
 ## 📸 Project Preview
 
-
 ### 🏠 Landing Page
 
 <p align="center">
-<img width="1350" height="639" alt="Screenshot 2026-06-25 201419" src="https://github.com/user-attachments/assets/20ea3bde-dd5a-429c-9a80-99edf4552c8f" />
-<img width="1349" height="629" alt="Screenshot 2026-06-25 201450" src="https://github.com/user-attachments/assets/089bffb9-bd7b-4134-b3e8-8e571380fb5e" />
-
+<img width="1350" height="639" alt="Landing Page" src="https://github.com/user-attachments/assets/20ea3bde-dd5a-429c-9a80-99edf4552c8f" />
+<img width="1349" height="629" alt="Landing Page 2" src="https://github.com/user-attachments/assets/089bffb9-bd7b-4134-b3e8-8e571380fb5e" />
 </p>
 
 ---
@@ -40,8 +39,7 @@ Find libraries with **pricing, timings, amenities, ratings, and real-time locati
 ### 🗺️ Explore Libraries
 
 <p align="center">
-<img width="1365" height="633" alt="image" src="https://github.com/user-attachments/assets/d67d45de-6f80-4b22-bdc5-9e971631197c" />
-
+<img width="1365" height="633" alt="Explore Page" src="https://github.com/user-attachments/assets/d67d45de-6f80-4b22-bdc5-9e971631197c" />
 </p>
 
 ---
@@ -49,18 +47,16 @@ Find libraries with **pricing, timings, amenities, ratings, and real-time locati
 ### 📖 Library Details
 
 <p align="center">
-<img width="1350" height="633" alt="Screenshot 2026-06-25 201720" src="https://github.com/user-attachments/assets/87dd98d8-4541-49f1-8b2a-0c6177700b54" />
-
+<img width="1350" height="633" alt="Library Detail" src="https://github.com/user-attachments/assets/87dd98d8-4541-49f1-8b2a-0c6177700b54" />
 </p>
 
 ---
 
-### Login/Signup
+### 🔐 Login / Signup
 
 <p align="center">
-<img width="1350" height="631" alt="Screenshot 2026-06-25 201913" src="https://github.com/user-attachments/assets/bb98e0f1-984b-4586-9c6b-dbee2c7dd0b7" />
-<img width="1352" height="630" alt="Screenshot 2026-06-25 201931" src="https://github.com/user-attachments/assets/5d3c5b73-073a-42a0-a128-8f48d9eacf9c" />
-
+<img width="1350" height="631" alt="Login" src="https://github.com/user-attachments/assets/bb98e0f1-984b-4586-9c6b-dbee2c7dd0b7" />
+<img width="1352" height="630" alt="Signup" src="https://github.com/user-attachments/assets/5d3c5b73-073a-42a0-a128-8f48d9eacf9c" />
 </p>
 
 ---
@@ -69,44 +65,45 @@ Find libraries with **pricing, timings, amenities, ratings, and real-time locati
 
 ShelfSpace helps students discover **libraries and paid study spaces** without relying on incomplete or outdated map listings.
 
-Unlike traditional map services, ShelfSpace combines **real OpenStreetMap locations** with **verified information** like pricing, operating hours, amenities, seating capacity, WiFi availability, and contact details.
+Unlike traditional map services, ShelfSpace combines **real OpenStreetMap locations** with **verified information** like pricing, operating hours, amenities, and contact details — the things a map pin alone never tells you.
 
-The project is built around a scalable data ingestion pipeline, allowing new districts or states to be added without changing application logic.
+The project is built around a scalable data ingestion pipeline. Adding a new district or state means editing an array in one script and rerunning it — no changes to application code required.
 
 ---
 
 ## ✨ Features
 
-| Feature                  | Description                                |
-| ------------------------ | ------------------------------------------ |
-| 🗺️ Interactive Map      | Explore nearby libraries visually          |
-| 📍 Smart Search          | Search by district or state                |
-| 📚 Detailed Profiles     | Pricing, timings, amenities, owner details |
-| ❤️ Save Libraries        | Bookmark favourite study spaces            |
-| 🔐 Secure Authentication | Supabase Auth                              |
-| ⭐ Ratings                | Community ratings (where available)        |
-| 📱 Responsive UI         | Optimized for desktop & mobile             |
-| ⚡ Fast Performance       | Built with Next.js App Router              |
+| Feature | Description |
+|---|---|
+| 🗺️ Interactive Map | Explore libraries visually via Leaflet + OpenStreetMap tiles (free, no billing required) |
+| 📍 Geolocation Search | "Near me" button finds libraries within 50km using real Haversine distance calculation |
+| 🔍 Search-First UX | Explore page shows nothing until the user searches — no irrelevant pre-loaded lists |
+| 📚 Detailed Profiles | Pricing, timings, amenities, owner details per library |
+| 🔖 Bookmark Libraries | Save favourite study spaces from any card or detail page |
+| 🔄 State-Preserving Nav | Search/location state persists in URL — going back from a detail page restores your exact previous search |
+| 🔐 Secure Auth | Supabase Auth with email/password, DB trigger auto-creates user profile on signup |
+| 📱 Responsive UI | Tested across mobile and desktop |
+| ⚡ Skeleton Loading | Next.js `loading.tsx` convention used across all data-fetching routes |
+| 🏗️ Real Data Pipeline | OpenStreetMap Overpass API + Nominatim geocoding, idempotent upserts keyed by OSM ID |
 
 ---
 
 ## 🛠 Tech Stack
 
-| Category       | Technology                               |
-| -------------- | ---------------------------------------- |
-| Framework      | Next.js 14                               |
-| Language       | TypeScript                               |
-| Styling        | Tailwind CSS                             |
-| Backend        | Supabase                                 |
-| Database       | PostgreSQL                               |
-| Authentication | Supabase Auth                            |
-| Maps           | Google Maps JavaScript API               |
-| Geodata        | OpenStreetMap (Overpass API + Nominatim) |
-| Hosting        | Vercel                                   |
+| Category | Technology |
+|---|---|
+| Framework | Next.js 16 (App Router) |
+| Language | TypeScript |
+| Styling | Tailwind CSS v4 |
+| Backend / DB | Supabase (PostgreSQL + Auth + RLS) |
+| Maps | Leaflet + OpenStreetMap tiles (free, no API key needed) |
+| Geodata source | OpenStreetMap — Overpass API + Nominatim geocoding |
+| Distance calc | Haversine formula (`src/lib/distance.ts`) |
+| Hosting | Vercel |
 
 ---
 
-# 🏗 Architecture
+## 🏗 Architecture
 
 ```text
                     OpenStreetMap
@@ -115,8 +112,7 @@ The project is built around a scalable data ingestion pipeline, allowing new dis
                Nominatim Geocoder
                          │
           scripts/fetch-libraries.ts
-                         │
-                      Upsert
+          (run manually, idempotent upsert)
                          │
                 ┌─────────────────┐
                 │    Supabase      │
@@ -136,7 +132,7 @@ The project is built around a scalable data ingestion pipeline, allowing new dis
 
 ---
 
-# 🗄 Database Schema
+## 🗄 Database Schema
 
 ```mermaid
 erDiagram
@@ -146,30 +142,36 @@ libraries ||--o{ saved_libraries : bookmarked
 libraries ||--|| library_details : contains
 
 profiles {
-uuid id
-string email
+  uuid id
+  string full_name
+  timestamptz created_at
 }
 
 libraries {
-uuid id
-string name
-string address
-float latitude
-float longitude
+  uuid id
+  string name
+  string address
+  string district
+  string locality
+  string state
+  float lat
+  float lng
+  float google_rating
+  string google_place_id
 }
 
 library_details {
-uuid library_id
-string timings
-string pricing
-string amenities
-string owner
-string contact
+  uuid library_id
+  string owner_name
+  string owner_contact
+  string pricing_info
+  jsonb timings
+  text[] amenities
 }
 
 saved_libraries {
-uuid user_id
-uuid library_id
+  uuid user_id
+  uuid library_id
 }
 ```
 
@@ -178,158 +180,162 @@ uuid library_id
 ## 📂 Folder Structure
 
 ```text
-ShelfSpace
+ShelfSpace/
 │
-├── app
-│   ├── explore
-│   ├── dashboard
-│   ├── library
-│   └── auth
+├── src/
+│   ├── app/
+│   │   ├── explore/          # Search-first library discovery page
+│   │   ├── dashboard/        # Saved libraries + user stats
+│   │   ├── library/[id]/     # Library detail page
+│   │   ├── login/
+│   │   └── signup/
+│   │
+│   ├── components/
+│   │   ├── Navbar.tsx
+│   │   ├── SaveButton.tsx        # Full save button (detail page)
+│   │   ├── SaveIconButton.tsx    # Compact bookmark icon (list cards)
+│   │   ├── BackButton.tsx        # router.back() — preserves explore URL state
+│   │   └── NearbyLibraries.tsx   # Geolocation-based homepage preview
+│   │
+│   └── lib/
+│       ├── supabase/
+│       │   ├── client.ts     # Browser Supabase client
+│       │   └── server.ts     # Server Supabase client (next/headers)
+│       ├── queries/
+│       │   └── libraries.ts  # All DB query functions
+│       └── distance.ts       # Haversine formula (client-safe, no server imports)
 │
-├── components
+├── scripts/
+│   └── fetch-libraries.ts    # OSM ingestion script
 │
-├── lib
-│
-├── scripts
-│   └── fetch-libraries.ts
-│
-├── public
-│   └── readme
-│
-├── supabase
-│   └── schema.sql
-│
+├── public/
 ├── package.json
 └── README.md
 ```
 
 ---
 
-# ⚡ Engineering Highlights
+## ⚡ Engineering Highlights
 
-* ✔ Real geographic data from OpenStreetMap
-* ✔ Provider-agnostic database design
-* ✔ Idempotent data ingestion pipeline
-* ✔ Row Level Security (RLS)
-* ✔ Manual enrichment workflow
-* ✔ Scalable architecture
-* ✔ Bookmark system with authenticated users
-* ✔ Separation of scraped and verified data
+- **Real geographic data** from OpenStreetMap — not mocked, not hardcoded
+- **Provider-agnostic schema** — data source can switch from OSM to Google Places without touching frontend code
+- **Idempotent ingestion pipeline** — re-running the script never creates duplicates, keyed by source ID
+- **Row Level Security (RLS)** on every table — public read for libraries, strictly user-scoped writes for saved lists and profiles
+- **Separation of scraped vs verified data** — `libraries` holds auto-ingested location data; `library_details` holds manually verified pricing/timings/owner info
+- **Client-safe module separation** — `distance.ts` is kept separate from `queries/libraries.ts` because the latter imports `next/headers` (server-only), and mixing them breaks client components
+- **URL-based explore state** — search query and location coordinates live in the URL (`?q=...&lat=...&lng=...`), not just React state, so navigating to a detail page and back restores the exact previous search context
+- **50km geolocation radius filter** — "Near me" hides libraries beyond a real-world useful distance rather than sorting them to the bottom
 
 ---
 
-# 🚀 Getting Started
+## 🚀 Getting Started
 
-## Clone Repository
+### Clone Repository
 
 ```bash
-git clone https://github.com/shubhitiwariiii/shelfspace.git
-
-cd shelfspace
+git clone https://github.com/shubhitiwariiii/library-finder.git
+cd library-finder
 ```
 
----
-
-## Install Dependencies
+### Install Dependencies
 
 ```bash
 npm install
 ```
 
----
+### Configure Environment Variables
 
-## Configure Environment Variables
-
-Create a `.env.local`
+Create `.env.local`:
 
 ```env
-NEXT_PUBLIC_SUPABASE_URL=
-
-NEXT_PUBLIC_SUPABASE_ANON_KEY=
-
-SUPABASE_SECRET_KEY=
-
-NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_publishable_key
+SUPABASE_SECRET_KEY=your_supabase_secret_key
 ```
 
----
+### Setup Database
 
-## Setup Database
+Run the schema SQL in your Supabase SQL Editor to create all four tables with RLS policies pre-configured. Also run the profile auto-creation trigger:
 
-Run
+```sql
+create or replace function public.handle_new_user()
+returns trigger as $$
+begin
+  insert into public.profiles (id, full_name)
+  values (new.id, new.raw_user_meta_data->>'full_name');
+  return new;
+end;
+$$ language plpgsql security definer;
 
+create trigger on_auth_user_created
+  after insert on auth.users
+  for each row execute function public.handle_new_user();
 ```
-supabase/schema.sql
-```
 
-inside the Supabase SQL Editor.
-
----
-
-## Fetch Library Data
+### Fetch Library Data
 
 ```bash
 npm run fetch-libraries
 ```
 
-This imports real library locations from OpenStreetMap.
+Pulls real library locations from OpenStreetMap for the districts defined in `AREAS` inside `scripts/fetch-libraries.ts`. Add new cities by extending that array and re-running — no other changes needed.
 
----
-
-## Run Development Server
+### Run Locally
 
 ```bash
 npm run dev
 ```
 
-Visit
-
-```
-http://localhost:3000
-```
+Visit `http://localhost:3000`
 
 ---
 
-# 🚀 Roadmap
+## 🗺️ Roadmap
 
-* ✅ Project Setup
-* ✅ Supabase Integration
-* ✅ OpenStreetMap Pipeline
-* ✅ Database Schema
-* ✅ Row Level Security
-* ✅ Landing Page
-* ✅ Explore Page
-* ⏳ Library Details
-* ⏳ Authentication
-* ⏳ Saved Dashboard
-* ⏳ Search Filters
-* ⏳ Mobile Optimization
-* ⏳ Admin Dashboard
-
----
-
-# 💡 Future Improvements
-
-* AI-based library recommendations
-* User reviews & ratings
-* Open now filter
-* Nearby libraries
-* Admin verification dashboard
-* Image gallery
-* Availability status
-* Analytics dashboard
+- ✅ Project setup + Supabase integration
+- ✅ OpenStreetMap ingestion pipeline
+- ✅ Database schema with RLS policies
+- ✅ Dark editorial landing page with live stats
+- ✅ Geolocation-based "Closest to you" homepage section
+- ✅ Explore page — search-first, geolocation sort, 50km radius filter
+- ✅ Interactive map view (Leaflet + OSM tiles, free)
+- ✅ Library detail pages
+- ✅ Authentication (email/password, Supabase Auth)
+- ✅ Saved libraries dashboard with stats and quick actions
+- ✅ Bookmark from list cards and detail pages
+- ✅ Login-redirect-and-auto-save flow for unauthenticated bookmark clicks
+- ✅ URL-preserved explore state (back navigation restores search context)
+- ✅ Skeleton loading states across all routes
+- ✅ Mobile responsive
+- ⏳ Manual data enrichment (pricing/timings/owner for existing libraries)
+- ⏳ Locality-level data (column exists, data entry pending)
+- ⏳ Admin enrichment interface
+- ⏳ User reviews and ratings
+- ⏳ "Open now" filter
+- ⏳ Expand coverage beyond Lucknow and Greater Noida
 
 ---
 
-# 👩‍💻 Author
+## 💡 Future Improvements
+
+- AI-based library recommendations
+- Image gallery per library
+- Availability / seat-count status
+- Analytics dashboard
+- Library owner verification flow
+- Push notifications for saved library updates
+
+---
+
+## 👩‍💻 Author
 
 **Shubhi Tiwari**
+B.Tech CSE (AI & ML) · Galgotias College of Engineering and Technology
 
 <p>
 <a href="https://github.com/shubhitiwariiii">
 <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github">
 </a>
-
 <a href="https://linkedin.com/in/shubhi-tiwari-664553329">
 <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin">
 </a>
@@ -339,8 +345,8 @@ http://localhost:3000
 
 <div align="center">
 
-## ⭐ If you found this project useful, please consider giving it a star!
+⭐ If you found this project useful, please consider giving it a star!
 
-Made with ❤️ 
+Made with ❤️
 
 </div>
